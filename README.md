@@ -7,9 +7,7 @@
 
 2. Get the IJython package either by downloading tar/zip file from this git release or clone this git repository.
 
-3. Go into the package directory and install package by
-
-`python setup.py install`
+3. Go into the package directory and install package by `python setup.py install`
 
 4. Make sure you have java JRE or set JAVA_HOME environment appropriately.
 
