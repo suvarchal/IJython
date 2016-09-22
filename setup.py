@@ -27,7 +27,7 @@ class install_with_kernelspec(install):
         install.run(self)
         user = '--user' in sys.argv
         try:
-            from ipykernel.kerspec import install_kernel_spec
+            from jupyter_client.kernelspec import install_kernel_spec
         except ImportError:
             from IPython.kernel.kernelspec import install_kernel_spec
         from IPython.utils.tempdir import TemporaryDirectory
@@ -65,7 +65,7 @@ setup(name='jython_kernel',
       py_modules=['jython_kernel'],
       license="MIT",
       cmdclass={'install': install_with_kernelspec},
-      install_requires=["IPython >= 3.0","ipykernel"],
+      install_requires=["IPython >= 3.0","jupyter_client"],
       classifiers=[
           'Framework :: IPython',
           'License :: OSI Approved :: BSD License',
