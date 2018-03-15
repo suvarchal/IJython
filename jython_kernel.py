@@ -52,22 +52,22 @@ class JythonKernel(Kernel):
     def do_execute(self, code, silent, store_history=False, user_expressions=None,
                    allow_stdin=False):
         code   =  code.strip()
-	abort_msg = {'status': 'abort',
+        abort_msg = {'status': 'abort',
                      'execution_count': self.execution_count}
         interrupt = False
         try:
-  	    output = self.jyrepl(code, timeout=None)
+            output = self.jyrepl(code, timeout=None)
             output = '\n'.join([line for line in output.splitlines()])+'\n'
         except KeyboardInterrupt:
             self._child.sendintr()
             output = self._child.before+output+'\n Current Jython cannot interrupt so restarting Jython'
             interrupt = True
             self._start_jython()
-	except EOF:
+        except EOF:
             output = self._child.before + 'Reached EOF Restarting Jython'
             self._start_jython()
 
- 	if not silent:
+        if not silent:
             stream_content = {'name': 'stdout', 'text': output}
             self.send_response(self.iopub_socket, 'stream', stream_content)
         if code.strip() and store_history:
@@ -86,7 +86,7 @@ class JythonKernel(Kernel):
         if not code or code[-1] == ' ':
             return default
         
- 	tokens = code.split()
+        tokens = code.split()
         if not tokens:
             return default
 
@@ -144,7 +144,7 @@ class JythonKernel(Kernel):
 #            self._child.sendline(code)
 #            now_prompt=self._child.expect_exact([u">>> ",u"... "])
 #            if len(self._child.before.splitlines())>1:    out+='\n'.join(self._child.before.splitlines()[1:])+'\n'
-#	    now_prompt=self._child.expect_exact([u">>> ",u"... "])
+#               now_prompt=self._child.expect_exact([u">>> ",u"... "])
 #        else:
 #            code='exec('+repr(code)+')'
 #            for line in code.splitlines():
